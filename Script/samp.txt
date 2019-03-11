@@ -1,0 +1,12 @@
+
+
+Warm greetings to you!
+This is Deepak Praturi, Team Manager for project ‘GOD OF WAR’. I would like to mention that our company is absolutely happy to be associated with yours and that it has been our pleasure to serve you.
+
+I would like to discuss a small issue that we are facing regarding the project that we are working on for your company. The issues we are facing are as follows:
+
+1. We currently do not possess the licensed software required to test our program code specially tailored for you. But, we’re fortunate that you possess those licenses and software’s that are required for debugging our program. I am glad that you have been kind enough to let us use that software through remote- access. 
+2. Although you have authorised us to use your machine via remote-access, there is prevalent some miscommunication that deters our work. Sometimes it so happens that emails go unanswered or the communication takes too long to establish. This is hindering the flow of the project.
+Now that I have put my problem across, I would like to make a humble suggestion that please allow my developer to access your remote desktop at the start of the day at a prefixed time so that both the parties can function to the best of their abilities without further disturbances and a long chain of emails.
+Thank you for your continued support. I hope to maintain our harmonious relation further.
+
