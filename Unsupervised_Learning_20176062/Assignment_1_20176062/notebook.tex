@@ -1,0 +1,1623 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Unsupervised\_Learning\_Assignment\_1\_20176062}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{secom.data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          0        1          2          3       4      5         6       7    \textbackslash{}
+0     3030.93  2564.00  2187.7333  1411.1265  1.3602  100.0   97.6133  0.1242   
+1     3095.78  2465.14  2230.4222  1463.6606  0.8294  100.0  102.3433  0.1247   
+2     2932.61  2559.94  2186.4111  1698.0172  1.5102  100.0   95.4878  0.1241   
+3     2988.72  2479.90  2199.0333   909.7926  1.3204  100.0  104.2367  0.1217   
+4     3032.24  2502.87  2233.3667  1326.5200  1.5334  100.0  100.3967  0.1235   
+5     2946.25  2432.84  2233.3667  1326.5200  1.5334  100.0  100.3967  0.1235   
+6     3030.27  2430.12  2230.4222  1463.6606  0.8294  100.0  102.3433  0.1247   
+7     3058.88  2690.15  2248.9000  1004.4692  0.7884  100.0  106.2400  0.1185   
+8     2967.68  2600.47  2248.9000  1004.4692  0.7884  100.0  106.2400  0.1185   
+9     3016.11  2428.37  2248.9000  1004.4692  0.7884  100.0  106.2400  0.1185   
+10    2994.05  2548.21  2195.1222  1046.1468  1.3204  100.0  103.3400  0.1223   
+11    2928.84  2479.40  2196.2111  1605.7578  0.9959  100.0   97.9156  0.1257   
+12    2920.07  2507.40  2195.1222  1046.1468  1.3204  100.0  103.3400  0.1223   
+13    3051.44  2529.27  2184.4333   877.6266  1.4668  100.0  107.8711  0.1240   
+14    2963.97  2629.48  2224.6222   947.7739  1.2924  100.0  104.8489  0.1197   
+15    2988.31  2546.26  2224.6222   947.7739  1.2924  100.0  104.8489  0.1197   
+16    3028.02  2560.87  2270.2556  1258.4558  1.3950  100.0  104.8078  0.1207   
+17    3032.73  2517.79  2270.2556  1258.4558  1.3950  100.0  104.8078  0.1207   
+18    3040.34  2501.16  2207.3889   962.5317  1.2043  100.0  104.0311  0.1210   
+19    2988.30  2519.05  2208.8556  1157.7224  1.5509  100.0  107.8022  0.1233   
+20    2987.32  2528.81        NaN        NaN     NaN    NaN       NaN  0.1195   
+21        NaN  2481.85  2207.3889   962.5317  1.2043  100.0  104.0311  0.1210   
+22    3002.27  2497.45  2207.3889   962.5317  1.2043  100.0  104.0311  0.1210   
+23    2884.74  2514.54  2160.3667   899.9488  1.4022  100.0  105.4978  0.1240   
+24    3010.41  2632.80  2203.9000  1116.4129  1.2639  100.0  102.2733  0.1199   
+25    2979.74  2446.56  2257.1667  1437.9565  1.4918  100.0  106.3400  0.1203   
+26    3067.35  2456.33  2257.1667  1437.9565  1.4918  100.0  106.3400  0.1203   
+27    2988.99  2607.63  2223.0333  1533.9934  1.3548  100.0  109.7067  0.1211   
+28    2972.78  2431.57  2190.4889  1059.4390  0.8614  100.0  102.1178  0.1216   
+29    2981.85  2529.11  2180.3778  1208.7411  1.2998  100.0  100.2789  0.1209   
+{\ldots}       {\ldots}      {\ldots}        {\ldots}        {\ldots}     {\ldots}    {\ldots}       {\ldots}     {\ldots}   
+1537  3006.22  2525.20  2192.7889  1268.5852  1.9935  100.0  104.5867  0.1268   
+1538  3128.11  2367.16  2223.5333  1352.1869  0.8714  100.0   97.2189  0.1196   
+1539  2908.94  2560.99  2187.3444  2882.8558  1.5876  100.0   85.4189  0.1235   
+1540  2996.04  2555.92  2190.7666  3530.2362  0.8017  100.0   83.8767  0.1249   
+1541  3246.31  2499.79  2216.8111  1190.4067  2.5148  100.0  114.5533  0.1230   
+1542  2965.57  2487.91  2210.3556   910.7177  1.6941  100.0  119.8822  0.1268   
+1543  3109.18  2447.97  2210.3556   910.7177  1.6941  100.0  119.8822  0.1268   
+1544  3108.98  2537.73  2210.3556   910.7177  1.6941  100.0  119.8822  0.1268   
+1545  3100.19  2490.60  2212.8445  1068.5644  1.7835  100.0  113.8833  0.1249   
+1546  3093.24  2488.18  2212.8445  1068.5644  1.7835  100.0  113.8833  0.1249   
+1547  3008.77  2542.36  2167.4222  2837.8788  1.4892  100.0   83.8222  0.1255   
+1548  3027.01  2464.98  2212.6334  1081.5662  1.0096  100.0  113.4278  0.1253   
+1549  3183.63  2498.00  2195.4444  2914.1792  1.5978  100.0   85.1011  0.1235   
+1550  3072.20  2406.47  2195.4444  2914.1792  1.5978  100.0   85.1011  0.1235   
+1551  2958.43  2489.06  2192.7556   867.3027  1.7393  100.0  123.4244  0.1251   
+1552  2939.35  2521.98  2195.1000  1526.4440  0.8279  100.0   96.3100  0.1203   
+1553  3020.79  2500.19  2210.3556   910.7177  1.6941  100.0  119.8822  0.1268   
+1554  3031.78  2528.55  2182.5555  1261.0898  1.2110  100.0  112.2922  0.1252   
+1555  2902.96  2515.03  2181.1889  1338.8895  2.1195  100.0  108.1400  0.1263   
+1556  3025.21  2503.30  2179.7333  3085.3781  1.4843  100.0   82.2467  0.1248   
+1557  3072.10  2534.87  2177.4333  2945.8855  1.3321  100.0   83.1700  0.1253   
+1558  3012.30  2466.84  2217.4111  1032.2836  1.4802  100.0  101.3511  0.1195   
+1559  3076.33  2456.13  2217.4111  1032.2836  1.4802  100.0  101.3511  0.1195   
+1560  2770.40  2549.42  2204.2889  2637.9989  1.5549  100.0   86.1089  0.1234   
+1561  2951.14  2326.59  2212.6334  1081.5662  1.0096  100.0  113.4278  0.1253   
+1562  2899.41  2464.36  2179.7333  3085.3781  1.4843  100.0   82.2467  0.1248   
+1563  3052.31  2522.55  2198.5667  1124.6595  0.8763  100.0   98.4689  0.1205   
+1564  2978.81  2379.78  2206.3000  1110.4967  0.8236  100.0   99.4122  0.1208   
+1565  2894.92  2532.01  2177.0333  1183.7287  1.5726  100.0   98.7978  0.1213   
+1566  2944.92  2450.76  2195.4444  2914.1792  1.5978  100.0   85.1011  0.1235   
+
+         8       9      {\ldots}        580       581     582     583     584  \textbackslash{}
+0     1.5005  0.0162    {\ldots}        NaN       NaN  0.5005  0.0118  0.0035   
+1     1.4966 -0.0005    {\ldots}     0.0060  208.2045  0.5019  0.0223  0.0055   
+2     1.4436  0.0041    {\ldots}     0.0148   82.8602  0.4958  0.0157  0.0039   
+3     1.4882 -0.0124    {\ldots}     0.0044   73.8432  0.4990  0.0103  0.0025   
+4     1.5031 -0.0031    {\ldots}        NaN       NaN  0.4800  0.4766  0.1045   
+5     1.5287  0.0167    {\ldots}     0.0052   44.0077  0.4949  0.0189  0.0044   
+6     1.5816 -0.0270    {\ldots}        NaN       NaN  0.5010  0.0143  0.0042   
+7     1.5153  0.0157    {\ldots}     0.0063   95.0310  0.4984  0.0106  0.0034   
+8     1.5358  0.0111    {\ldots}     0.0045  111.6525  0.4993  0.0172  0.0046   
+9     1.5381  0.0159    {\ldots}     0.0073   90.2294  0.4967  0.0152  0.0038   
+10    1.5144 -0.0190    {\ldots}     0.0071   57.8122  0.4925  0.0158  0.0041   
+11    1.4690  0.0170    {\ldots}     0.0081   75.5077  0.4987  0.0427  0.0092   
+12    1.5310 -0.0259    {\ldots}     0.0034   52.2039  0.4950  0.0153  0.0041   
+13    1.5236 -0.0209    {\ldots}        NaN       NaN  0.5034  0.0151  0.0038   
+14    1.4474  0.0144    {\ldots}     0.0084  142.9080  0.5077  0.0094  0.0026   
+15    1.5465  0.0250    {\ldots}     0.0045  100.2745  0.5058  0.0078  0.0021   
+16    1.4368  0.0150    {\ldots}     0.0042   82.0989  0.5005  0.0108  0.0034   
+17    1.5537  0.0220    {\ldots}        NaN       NaN  0.5015  0.0105  0.0027   
+18    1.5481 -0.0367    {\ldots}        NaN       NaN  0.4948  0.0117  0.0034   
+19    1.5362 -0.0259    {\ldots}     0.0032   47.1586  0.5036  0.0169  0.0039   
+20    1.6343 -0.0263    {\ldots}        NaN       NaN  0.5011  0.0117  0.0033   
+21    1.5559  0.0002    {\ldots}     0.0023   34.4153  0.4947  0.0137  0.0041   
+22    1.5465  0.0195    {\ldots}     0.0075  114.5979  0.4977  0.0114  0.0037   
+23    1.5585 -0.0317    {\ldots}     0.0077  216.8869  0.4982  0.0099  0.0027   
+24    1.4227  0.0194    {\ldots}     0.0101  125.0600  0.5032  0.0159  0.0039   
+25    1.5136  0.0018    {\ldots}        NaN       NaN  0.5012  0.0336  0.0072   
+26    1.4860 -0.0019    {\ldots}        NaN       NaN  0.5006  0.0083  0.0022   
+27    1.5582 -0.0101    {\ldots}     0.0116  216.9552  0.5069  0.0158  0.0040   
+28    1.5438  0.0065    {\ldots}     0.0053  127.5067  0.5036  0.0137  0.0036   
+29    1.4200 -0.0016    {\ldots}     0.0062  146.8715  0.5019  0.0139  0.0034   
+{\ldots}      {\ldots}     {\ldots}    {\ldots}        {\ldots}       {\ldots}     {\ldots}     {\ldots}     {\ldots}   
+1537  1.4522 -0.0039    {\ldots}        NaN       NaN  0.4942  0.0175  0.0045   
+1538  1.3907  0.0074    {\ldots}     0.0038   47.3376  0.4977  0.0144  0.0037   
+1539  1.4167  0.0041    {\ldots}        NaN       NaN  0.4987  0.0118  0.0028   
+1540  1.4158 -0.0029    {\ldots}     0.0046   67.6676  0.5011  0.0163  0.0035   
+1541  1.3966 -0.0057    {\ldots}     0.0019   23.5979  0.5021  0.0103  0.0030   
+1542  1.3109  0.0174    {\ldots}     0.0087  121.9426  0.4992  0.0136  0.0037   
+1543  1.3502  0.0201    {\ldots}     0.0055   50.8827  0.4975  0.0109  0.0038   
+1544  1.2901  0.0202    {\ldots}     0.0039   72.9676  0.4986  0.0192  0.0046   
+1545  1.4294 -0.0014    {\ldots}     0.0070  402.6874  0.4951  0.0165  0.0051   
+1546  1.3482  0.0060    {\ldots}     0.0047  105.7142  0.5022  0.0249  0.0049   
+1547  1.2895  0.0023    {\ldots}     0.0022   36.2975  0.5012  0.0160  0.0044   
+1548  1.4410  0.0035    {\ldots}     0.0071   88.5812  0.4944  0.0171  0.0040   
+1549  1.4129 -0.0081    {\ldots}        NaN       NaN  0.5037  0.0117  0.0030   
+1550  1.3148 -0.0024    {\ldots}     0.0022   27.5514  0.5034  0.0178  0.0043   
+1551  1.4386 -0.0179    {\ldots}     0.0044   30.7574  0.4972  0.0157  0.0040   
+1552  1.4366  0.0083    {\ldots}     0.0074  247.6285  0.5031  0.0111  0.0028   
+1553  1.3405  0.0201    {\ldots}     0.0077  134.3983  0.4985  0.0126  0.0036   
+1554  1.3485  0.0151    {\ldots}     0.0098  117.0945  0.5025  0.0138  0.0039   
+1555  1.3255 -0.0052    {\ldots}     0.0051  184.8703  0.5002  0.0130  0.0035   
+1556  1.3687 -0.0070    {\ldots}     0.0016   46.1076  0.5019  0.0158  0.0043   
+1557  1.4359 -0.0114    {\ldots}     0.0023   26.7330  0.5010  0.0132  0.0035   
+1558  1.3832  0.0042    {\ldots}     0.0054  176.6783  0.4993  0.0130  0.0037   
+1559  1.3120 -0.0043    {\ldots}     0.0057  117.4564  0.4960  0.0157  0.0036   
+1560  1.2811  0.0037    {\ldots}     0.0042  127.3154  0.5009  0.0155  0.0036   
+1561  1.4492 -0.0134    {\ldots}     0.0051   46.4573  0.4965  0.0118  0.0032   
+1562  1.3424 -0.0045    {\ldots}     0.0047  203.1720  0.4988  0.0143  0.0039   
+1563  1.4333 -0.0061    {\ldots}        NaN       NaN  0.4975  0.0131  0.0036   
+1564     NaN     NaN    {\ldots}     0.0025   43.5231  0.4987  0.0153  0.0041   
+1565  1.4622 -0.0072    {\ldots}     0.0075   93.4941  0.5004  0.0178  0.0038   
+1566     NaN     NaN    {\ldots}     0.0045  137.7844  0.4987  0.0181  0.0040   
+
+          585     586     587     588       589  
+0      2.3630     NaN     NaN     NaN       NaN  
+1      4.4447  0.0096  0.0201  0.0060  208.2045  
+2      3.1745  0.0584  0.0484  0.0148   82.8602  
+3      2.0544  0.0202  0.0149  0.0044   73.8432  
+4     99.3032  0.0202  0.0149  0.0044   73.8432  
+5      3.8276  0.0342  0.0151  0.0052   44.0077  
+6      2.8515  0.0342  0.0151  0.0052   44.0077  
+7      2.1261  0.0204  0.0194  0.0063   95.0310  
+8      3.4456  0.0111  0.0124  0.0045  111.6525  
+9      3.0687  0.0212  0.0191  0.0073   90.2294  
+10     3.2115  0.0355  0.0205  0.0071   57.8122  
+11     8.5646  0.0370  0.0279  0.0081   75.5077  
+12     3.0926  0.0188  0.0098  0.0034   52.2039  
+13     3.0063  0.0188  0.0098  0.0034   52.2039  
+14     1.8483  0.0202  0.0289  0.0084  142.9080  
+15     1.5352  0.0174  0.0174  0.0045  100.2745  
+16     2.1574  0.0184  0.0151  0.0042   82.0989  
+17     2.0979  0.0184  0.0151  0.0042   82.0989  
+18     2.3737  0.0184  0.0151  0.0042   82.0989  
+19     3.3514  0.0229  0.0108  0.0032   47.1586  
+20     2.3308  0.0229  0.0108  0.0032   47.1586  
+21     2.7729  0.0175  0.0060  0.0023   34.4153  
+22     2.2849  0.0250  0.0286  0.0075  114.5979  
+23     1.9771  0.0098  0.0213  0.0077  216.8869  
+24     3.1576  0.0288  0.0361  0.0101  125.0600  
+25     6.7053  0.0288  0.0361  0.0101  125.0600  
+26     1.6593  0.0288  0.0361  0.0101  125.0600  
+27     3.1232  0.0183  0.0397  0.0116  216.9552  
+28     2.7205  0.0130  0.0165  0.0053  127.5067  
+29     2.7747  0.0121  0.0178  0.0062  146.8715  
+{\ldots}       {\ldots}     {\ldots}     {\ldots}     {\ldots}       {\ldots}  
+1537   3.5322  0.0199  0.0097  0.0037   48.7045  
+1538   2.9002  0.0237  0.0112  0.0038   47.3376  
+1539   2.3583  0.0237  0.0112  0.0038   47.3376  
+1540   3.2608  0.0181  0.0123  0.0046   67.6676  
+1541   2.0418  0.0266  0.0063  0.0019   23.5979  
+1542   2.7204  0.0216  0.0263  0.0087  121.9426  
+1543   2.1905  0.0273  0.0139  0.0055   50.8827  
+1544   3.8442  0.0172  0.0126  0.0039   72.9676  
+1545   3.3383  0.0063  0.0252  0.0070  402.6874  
+1546   4.9623  0.0134  0.0142  0.0047  105.7142  
+1547   3.2008  0.0222  0.0080  0.0022   36.2975  
+1548   3.4656  0.0253  0.0224  0.0071   88.5812  
+1549   2.3203  0.0253  0.0224  0.0071   88.5812  
+1550   3.5459  0.0236  0.0065  0.0022   27.5514  
+1551   3.1578  0.0400  0.0123  0.0044   30.7574  
+1552   2.2144  0.0085  0.0212  0.0074  247.6285  
+1553   2.5295  0.0174  0.0234  0.0077  134.3983  
+1554   2.7512  0.0235  0.0275  0.0098  117.0945  
+1555   2.5982  0.0086  0.0160  0.0051  184.8703  
+1556   3.1428  0.0120  0.0055  0.0016   46.1076  
+1557   2.6249  0.0277  0.0074  0.0023   26.7330  
+1558   2.5976  0.0097  0.0172  0.0054  176.6783  
+1559   3.1743  0.0150  0.0176  0.0057  117.4564  
+1560   3.0997  0.0105  0.0133  0.0042  127.3154  
+1561   2.3817  0.0320  0.0148  0.0051   46.4573  
+1562   2.8669  0.0068  0.0138  0.0047  203.1720  
+1563   2.6238  0.0068  0.0138  0.0047  203.1720  
+1564   3.0590  0.0197  0.0086  0.0025   43.5231  
+1565   3.5662  0.0262  0.0245  0.0075   93.4941  
+1566   3.6275  0.0117  0.0162  0.0045  137.7844  
+
+[1567 rows x 590 columns]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Count number of NAs for each column
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{nas} \PY{o}{=} \PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{nas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[6, 7, 14, 14, 14, 14, 14, 9, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 10, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 24, 24, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 7, 6, 6, 6, 7, 7, 7, 6, 6, 6, 6, 6, 6, 794, 794, 6, 24, 24, 24, 24, 24, 24, 24, 24, 1, 12, 1341, 0, 0, 0, 51, 51, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 1018, 1018, 1018, 715, 0, 0, 0, 0, 0, 24, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 5, 6, 7, 14, 14, 14, 14, 14, 9, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 10, 0, 1429, 1429, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 24, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 7, 6, 6, 6, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6, 24, 24, 24, 24, 24, 24, 24, 24, 1, 12, 1341, 0, 0, 0, 51, 51, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 1018, 1018, 1018, 715, 0, 0, 0, 0, 0, 24, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 5, 6, 7, 14, 14, 14, 14, 14, 9, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 10, 0, 1429, 1429, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 24, 24, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 7, 6, 6, 6, 7, 7, 7, 6, 6, 6, 6, 6, 6, 794, 794, 6, 24, 24, 24, 24, 24, 24, 24, 24, 1, 12, 1341, 0, 0, 0, 51, 51, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 1018, 1018, 1018, 715, 0, 0, 0, 0, 0, 24, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 5, 6, 7, 14, 14, 14, 14, 14, 9, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 10, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 24, 24, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 7, 6, 6, 6, 7, 7, 7, 6, 6, 6, 6, 6, 6, 6, 24, 24, 24, 24, 24, 24, 24, 24, 1, 12, 1341, 0, 0, 0, 51, 51, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 1018, 1018, 1018, 715, 0, 0, 0, 0, 0, 24, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 2, 2, 2, 2, 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 260, 1, 1, 1, 1, 273, 273, 273, 273, 273, 273, 273, 273, 0, 0, 0, 0, 0, 0, 0, 0, 949, 949, 949, 949, 1, 1, 1, 1, 1, 1, 1, 1]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Read lables for the data
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{lables} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{secom\PYZus{}labels.data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lables}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      0                    1
+0    -1  19/07/2008 11:55:00
+1    -1  19/07/2008 12:32:00
+2     1  19/07/2008 13:17:00
+3    -1  19/07/2008 14:43:00
+4    -1  19/07/2008 15:22:00
+5    -1  19/07/2008 17:53:00
+6    -1  19/07/2008 19:44:00
+7    -1  19/07/2008 19:45:00
+8    -1  19/07/2008 20:24:00
+9    -1  19/07/2008 21:35:00
+10    1  19/07/2008 21:57:00
+11    1  19/07/2008 22:52:00
+12   -1  20/07/2008 03:35:00
+13   -1  21/07/2008 08:21:00
+14    1  21/07/2008 11:53:00
+15   -1  22/07/2008 00:03:00
+16   -1  22/07/2008 02:59:00
+17   -1  22/07/2008 08:41:00
+18   -1  22/07/2008 11:47:00
+19   -1  22/07/2008 14:00:00
+20   -1  22/07/2008 15:30:00
+21   -1  23/07/2008 05:15:00
+22   -1  23/07/2008 19:22:00
+23    1  25/07/2008 15:23:00
+24   -1  27/07/2008 04:18:00
+25   -1  27/07/2008 09:37:00
+26   -1  27/07/2008 11:10:00
+27   -1  27/07/2008 15:46:00
+28   -1  27/07/2008 16:06:00
+29   -1  27/07/2008 16:49:00
+{\ldots}  ..                  {\ldots}
+1537 -1  15/10/2008 18:16:00
+1538 -1  15/10/2008 19:15:00
+1539 -1  15/10/2008 19:24:00
+1540 -1  15/10/2008 21:44:00
+1541 -1  15/10/2008 22:45:00
+1542 -1  15/10/2008 22:54:00
+1543 -1  15/10/2008 23:00:00
+1544 -1  15/10/2008 23:45:00
+1545 -1  16/10/2008 02:16:00
+1546 -1  16/10/2008 02:16:00
+1547 -1  16/10/2008 02:17:00
+1548 -1  16/10/2008 02:22:00
+1549 -1  16/10/2008 02:55:00
+1550 -1  16/10/2008 03:56:00
+1551 -1  16/10/2008 04:02:00
+1552 -1  16/10/2008 04:02:00
+1553 -1  16/10/2008 04:04:00
+1554 -1  16/10/2008 04:47:00
+1555 -1  16/10/2008 04:50:00
+1556 -1  16/10/2008 04:54:00
+1557 -1  16/10/2008 05:08:00
+1558 -1  16/10/2008 05:13:00
+1559 -1  16/10/2008 05:44:00
+1560 -1  16/10/2008 05:58:00
+1561 -1  16/10/2008 15:02:00
+1562 -1  16/10/2008 15:13:00
+1563 -1  16/10/2008 20:49:00
+1564 -1  17/10/2008 05:26:00
+1565 -1  17/10/2008 06:01:00
+1566 -1  17/10/2008 06:07:00
+
+[1567 rows x 2 columns]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Replace -1 with 0
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{lables} \PY{o}{=} \PY{n}{lables}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{lables}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      0                    1
+0     0  19/07/2008 11:55:00
+1     0  19/07/2008 12:32:00
+2     1  19/07/2008 13:17:00
+3     0  19/07/2008 14:43:00
+4     0  19/07/2008 15:22:00
+5     0  19/07/2008 17:53:00
+6     0  19/07/2008 19:44:00
+7     0  19/07/2008 19:45:00
+8     0  19/07/2008 20:24:00
+9     0  19/07/2008 21:35:00
+10    1  19/07/2008 21:57:00
+11    1  19/07/2008 22:52:00
+12    0  20/07/2008 03:35:00
+13    0  21/07/2008 08:21:00
+14    1  21/07/2008 11:53:00
+15    0  22/07/2008 00:03:00
+16    0  22/07/2008 02:59:00
+17    0  22/07/2008 08:41:00
+18    0  22/07/2008 11:47:00
+19    0  22/07/2008 14:00:00
+20    0  22/07/2008 15:30:00
+21    0  23/07/2008 05:15:00
+22    0  23/07/2008 19:22:00
+23    1  25/07/2008 15:23:00
+24    0  27/07/2008 04:18:00
+25    0  27/07/2008 09:37:00
+26    0  27/07/2008 11:10:00
+27    0  27/07/2008 15:46:00
+28    0  27/07/2008 16:06:00
+29    0  27/07/2008 16:49:00
+{\ldots}  ..                  {\ldots}
+1537  0  15/10/2008 18:16:00
+1538  0  15/10/2008 19:15:00
+1539  0  15/10/2008 19:24:00
+1540  0  15/10/2008 21:44:00
+1541  0  15/10/2008 22:45:00
+1542  0  15/10/2008 22:54:00
+1543  0  15/10/2008 23:00:00
+1544  0  15/10/2008 23:45:00
+1545  0  16/10/2008 02:16:00
+1546  0  16/10/2008 02:16:00
+1547  0  16/10/2008 02:17:00
+1548  0  16/10/2008 02:22:00
+1549  0  16/10/2008 02:55:00
+1550  0  16/10/2008 03:56:00
+1551  0  16/10/2008 04:02:00
+1552  0  16/10/2008 04:02:00
+1553  0  16/10/2008 04:04:00
+1554  0  16/10/2008 04:47:00
+1555  0  16/10/2008 04:50:00
+1556  0  16/10/2008 04:54:00
+1557  0  16/10/2008 05:08:00
+1558  0  16/10/2008 05:13:00
+1559  0  16/10/2008 05:44:00
+1560  0  16/10/2008 05:58:00
+1561  0  16/10/2008 15:02:00
+1562  0  16/10/2008 15:13:00
+1563  0  16/10/2008 20:49:00
+1564  0  17/10/2008 05:26:00
+1565  0  17/10/2008 06:01:00
+1566  0  17/10/2008 06:07:00
+
+[1567 rows x 2 columns]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Substitute NAs with mean of that particular column
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+              0        1            2            3         4      5    \textbackslash{}
+0     3030.930000  2564.00  2187.733300  1411.126500  1.360200  100.0   
+1     3095.780000  2465.14  2230.422200  1463.660600  0.829400  100.0   
+2     2932.610000  2559.94  2186.411100  1698.017200  1.510200  100.0   
+3     2988.720000  2479.90  2199.033300   909.792600  1.320400  100.0   
+4     3032.240000  2502.87  2233.366700  1326.520000  1.533400  100.0   
+5     2946.250000  2432.84  2233.366700  1326.520000  1.533400  100.0   
+6     3030.270000  2430.12  2230.422200  1463.660600  0.829400  100.0   
+7     3058.880000  2690.15  2248.900000  1004.469200  0.788400  100.0   
+8     2967.680000  2600.47  2248.900000  1004.469200  0.788400  100.0   
+9     3016.110000  2428.37  2248.900000  1004.469200  0.788400  100.0   
+10    2994.050000  2548.21  2195.122200  1046.146800  1.320400  100.0   
+11    2928.840000  2479.40  2196.211100  1605.757800  0.995900  100.0   
+12    2920.070000  2507.40  2195.122200  1046.146800  1.320400  100.0   
+13    3051.440000  2529.27  2184.433300   877.626600  1.466800  100.0   
+14    2963.970000  2629.48  2224.622200   947.773900  1.292400  100.0   
+15    2988.310000  2546.26  2224.622200   947.773900  1.292400  100.0   
+16    3028.020000  2560.87  2270.255600  1258.455800  1.395000  100.0   
+17    3032.730000  2517.79  2270.255600  1258.455800  1.395000  100.0   
+18    3040.340000  2501.16  2207.388900   962.531700  1.204300  100.0   
+19    2988.300000  2519.05  2208.855600  1157.722400  1.550900  100.0   
+20    2987.320000  2528.81  2200.547318  1396.376627  4.197013  100.0   
+21    3014.452896  2481.85  2207.388900   962.531700  1.204300  100.0   
+22    3002.270000  2497.45  2207.388900   962.531700  1.204300  100.0   
+23    2884.740000  2514.54  2160.366700   899.948800  1.402200  100.0   
+24    3010.410000  2632.80  2203.900000  1116.412900  1.263900  100.0   
+25    2979.740000  2446.56  2257.166700  1437.956500  1.491800  100.0   
+26    3067.350000  2456.33  2257.166700  1437.956500  1.491800  100.0   
+27    2988.990000  2607.63  2223.033300  1533.993400  1.354800  100.0   
+28    2972.780000  2431.57  2190.488900  1059.439000  0.861400  100.0   
+29    2981.850000  2529.11  2180.377800  1208.741100  1.299800  100.0   
+{\ldots}           {\ldots}      {\ldots}          {\ldots}          {\ldots}       {\ldots}    {\ldots}   
+1537  3006.220000  2525.20  2192.788900  1268.585200  1.993500  100.0   
+1538  3128.110000  2367.16  2223.533300  1352.186900  0.871400  100.0   
+1539  2908.940000  2560.99  2187.344400  2882.855800  1.587600  100.0   
+1540  2996.040000  2555.92  2190.766600  3530.236200  0.801700  100.0   
+1541  3246.310000  2499.79  2216.811100  1190.406700  2.514800  100.0   
+1542  2965.570000  2487.91  2210.355600   910.717700  1.694100  100.0   
+1543  3109.180000  2447.97  2210.355600   910.717700  1.694100  100.0   
+1544  3108.980000  2537.73  2210.355600   910.717700  1.694100  100.0   
+1545  3100.190000  2490.60  2212.844500  1068.564400  1.783500  100.0   
+1546  3093.240000  2488.18  2212.844500  1068.564400  1.783500  100.0   
+1547  3008.770000  2542.36  2167.422200  2837.878800  1.489200  100.0   
+1548  3027.010000  2464.98  2212.633400  1081.566200  1.009600  100.0   
+1549  3183.630000  2498.00  2195.444400  2914.179200  1.597800  100.0   
+1550  3072.200000  2406.47  2195.444400  2914.179200  1.597800  100.0   
+1551  2958.430000  2489.06  2192.755600   867.302700  1.739300  100.0   
+1552  2939.350000  2521.98  2195.100000  1526.444000  0.827900  100.0   
+1553  3020.790000  2500.19  2210.355600   910.717700  1.694100  100.0   
+1554  3031.780000  2528.55  2182.555500  1261.089800  1.211000  100.0   
+1555  2902.960000  2515.03  2181.188900  1338.889500  2.119500  100.0   
+1556  3025.210000  2503.30  2179.733300  3085.378100  1.484300  100.0   
+1557  3072.100000  2534.87  2177.433300  2945.885500  1.332100  100.0   
+1558  3012.300000  2466.84  2217.411100  1032.283600  1.480200  100.0   
+1559  3076.330000  2456.13  2217.411100  1032.283600  1.480200  100.0   
+1560  2770.400000  2549.42  2204.288900  2637.998900  1.554900  100.0   
+1561  2951.140000  2326.59  2212.633400  1081.566200  1.009600  100.0   
+1562  2899.410000  2464.36  2179.733300  3085.378100  1.484300  100.0   
+1563  3052.310000  2522.55  2198.566700  1124.659500  0.876300  100.0   
+1564  2978.810000  2379.78  2206.300000  1110.496700  0.823600  100.0   
+1565  2894.920000  2532.01  2177.033300  1183.728700  1.572600  100.0   
+1566  2944.920000  2450.76  2195.444400  2914.179200  1.597800  100.0   
+
+             6       7         8         9       {\ldots}           580  \textbackslash{}
+0      97.613300  0.1242  1.500500  0.016200     {\ldots}      0.005396   
+1     102.343300  0.1247  1.496600 -0.000500     {\ldots}      0.006000   
+2      95.487800  0.1241  1.443600  0.004100     {\ldots}      0.014800   
+3     104.236700  0.1217  1.488200 -0.012400     {\ldots}      0.004400   
+4     100.396700  0.1235  1.503100 -0.003100     {\ldots}      0.005396   
+5     100.396700  0.1235  1.528700  0.016700     {\ldots}      0.005200   
+6     102.343300  0.1247  1.581600 -0.027000     {\ldots}      0.005396   
+7     106.240000  0.1185  1.515300  0.015700     {\ldots}      0.006300   
+8     106.240000  0.1185  1.535800  0.011100     {\ldots}      0.004500   
+9     106.240000  0.1185  1.538100  0.015900     {\ldots}      0.007300   
+10    103.340000  0.1223  1.514400 -0.019000     {\ldots}      0.007100   
+11     97.915600  0.1257  1.469000  0.017000     {\ldots}      0.008100   
+12    103.340000  0.1223  1.531000 -0.025900     {\ldots}      0.003400   
+13    107.871100  0.1240  1.523600 -0.020900     {\ldots}      0.005396   
+14    104.848900  0.1197  1.447400  0.014400     {\ldots}      0.008400   
+15    104.848900  0.1197  1.546500  0.025000     {\ldots}      0.004500   
+16    104.807800  0.1207  1.436800  0.015000     {\ldots}      0.004200   
+17    104.807800  0.1207  1.553700  0.022000     {\ldots}      0.005396   
+18    104.031100  0.1210  1.548100 -0.036700     {\ldots}      0.005396   
+19    107.802200  0.1233  1.536200 -0.025900     {\ldots}      0.003200   
+20    101.112908  0.1195  1.634300 -0.026300     {\ldots}      0.005396   
+21    104.031100  0.1210  1.555900  0.000200     {\ldots}      0.002300   
+22    104.031100  0.1210  1.546500  0.019500     {\ldots}      0.007500   
+23    105.497800  0.1240  1.558500 -0.031700     {\ldots}      0.007700   
+24    102.273300  0.1199  1.422700  0.019400     {\ldots}      0.010100   
+25    106.340000  0.1203  1.513600  0.001800     {\ldots}      0.005396   
+26    106.340000  0.1203  1.486000 -0.001900     {\ldots}      0.005396   
+27    109.706700  0.1211  1.558200 -0.010100     {\ldots}      0.011600   
+28    102.117800  0.1216  1.543800  0.006500     {\ldots}      0.005300   
+29    100.278900  0.1209  1.420000 -0.001600     {\ldots}      0.006200   
+{\ldots}          {\ldots}     {\ldots}       {\ldots}       {\ldots}     {\ldots}           {\ldots}   
+1537  104.586700  0.1268  1.452200 -0.003900     {\ldots}      0.005396   
+1538   97.218900  0.1196  1.390700  0.007400     {\ldots}      0.003800   
+1539   85.418900  0.1235  1.416700  0.004100     {\ldots}      0.005396   
+1540   83.876700  0.1249  1.415800 -0.002900     {\ldots}      0.004600   
+1541  114.553300  0.1230  1.396600 -0.005700     {\ldots}      0.001900   
+1542  119.882200  0.1268  1.310900  0.017400     {\ldots}      0.008700   
+1543  119.882200  0.1268  1.350200  0.020100     {\ldots}      0.005500   
+1544  119.882200  0.1268  1.290100  0.020200     {\ldots}      0.003900   
+1545  113.883300  0.1249  1.429400 -0.001400     {\ldots}      0.007000   
+1546  113.883300  0.1249  1.348200  0.006000     {\ldots}      0.004700   
+1547   83.822200  0.1255  1.289500  0.002300     {\ldots}      0.002200   
+1548  113.427800  0.1253  1.441000  0.003500     {\ldots}      0.007100   
+1549   85.101100  0.1235  1.412900 -0.008100     {\ldots}      0.005396   
+1550   85.101100  0.1235  1.314800 -0.002400     {\ldots}      0.002200   
+1551  123.424400  0.1251  1.438600 -0.017900     {\ldots}      0.004400   
+1552   96.310000  0.1203  1.436600  0.008300     {\ldots}      0.007400   
+1553  119.882200  0.1268  1.340500  0.020100     {\ldots}      0.007700   
+1554  112.292200  0.1252  1.348500  0.015100     {\ldots}      0.009800   
+1555  108.140000  0.1263  1.325500 -0.005200     {\ldots}      0.005100   
+1556   82.246700  0.1248  1.368700 -0.007000     {\ldots}      0.001600   
+1557   83.170000  0.1253  1.435900 -0.011400     {\ldots}      0.002300   
+1558  101.351100  0.1195  1.383200  0.004200     {\ldots}      0.005400   
+1559  101.351100  0.1195  1.312000 -0.004300     {\ldots}      0.005700   
+1560   86.108900  0.1234  1.281100  0.003700     {\ldots}      0.004200   
+1561  113.427800  0.1253  1.449200 -0.013400     {\ldots}      0.005100   
+1562   82.246700  0.1248  1.342400 -0.004500     {\ldots}      0.004700   
+1563   98.468900  0.1205  1.433300 -0.006100     {\ldots}      0.005396   
+1564   99.412200  0.1208  1.462862 -0.000841     {\ldots}      0.002500   
+1565   98.797800  0.1213  1.462200 -0.007200     {\ldots}      0.007500   
+1566   85.101100  0.1235  1.462862 -0.000841     {\ldots}      0.004500   
+
+             581     582     583     584      585       586       587  \textbackslash{}
+0      97.934373  0.5005  0.0118  0.0035   2.3630  0.021458  0.016475   
+1     208.204500  0.5019  0.0223  0.0055   4.4447  0.009600  0.020100   
+2      82.860200  0.4958  0.0157  0.0039   3.1745  0.058400  0.048400   
+3      73.843200  0.4990  0.0103  0.0025   2.0544  0.020200  0.014900   
+4      97.934373  0.4800  0.4766  0.1045  99.3032  0.020200  0.014900   
+5      44.007700  0.4949  0.0189  0.0044   3.8276  0.034200  0.015100   
+6      97.934373  0.5010  0.0143  0.0042   2.8515  0.034200  0.015100   
+7      95.031000  0.4984  0.0106  0.0034   2.1261  0.020400  0.019400   
+8     111.652500  0.4993  0.0172  0.0046   3.4456  0.011100  0.012400   
+9      90.229400  0.4967  0.0152  0.0038   3.0687  0.021200  0.019100   
+10     57.812200  0.4925  0.0158  0.0041   3.2115  0.035500  0.020500   
+11     75.507700  0.4987  0.0427  0.0092   8.5646  0.037000  0.027900   
+12     52.203900  0.4950  0.0153  0.0041   3.0926  0.018800  0.009800   
+13     97.934373  0.5034  0.0151  0.0038   3.0063  0.018800  0.009800   
+14    142.908000  0.5077  0.0094  0.0026   1.8483  0.020200  0.028900   
+15    100.274500  0.5058  0.0078  0.0021   1.5352  0.017400  0.017400   
+16     82.098900  0.5005  0.0108  0.0034   2.1574  0.018400  0.015100   
+17     97.934373  0.5015  0.0105  0.0027   2.0979  0.018400  0.015100   
+18     97.934373  0.4948  0.0117  0.0034   2.3737  0.018400  0.015100   
+19     47.158600  0.5036  0.0169  0.0039   3.3514  0.022900  0.010800   
+20     97.934373  0.5011  0.0117  0.0033   2.3308  0.022900  0.010800   
+21     34.415300  0.4947  0.0137  0.0041   2.7729  0.017500  0.006000   
+22    114.597900  0.4977  0.0114  0.0037   2.2849  0.025000  0.028600   
+23    216.886900  0.4982  0.0099  0.0027   1.9771  0.009800  0.021300   
+24    125.060000  0.5032  0.0159  0.0039   3.1576  0.028800  0.036100   
+25     97.934373  0.5012  0.0336  0.0072   6.7053  0.028800  0.036100   
+26     97.934373  0.5006  0.0083  0.0022   1.6593  0.028800  0.036100   
+27    216.955200  0.5069  0.0158  0.0040   3.1232  0.018300  0.039700   
+28    127.506700  0.5036  0.0137  0.0036   2.7205  0.013000  0.016500   
+29    146.871500  0.5019  0.0139  0.0034   2.7747  0.012100  0.017800   
+{\ldots}          {\ldots}     {\ldots}     {\ldots}     {\ldots}      {\ldots}       {\ldots}       {\ldots}   
+1537   97.934373  0.4942  0.0175  0.0045   3.5322  0.019900  0.009700   
+1538   47.337600  0.4977  0.0144  0.0037   2.9002  0.023700  0.011200   
+1539   97.934373  0.4987  0.0118  0.0028   2.3583  0.023700  0.011200   
+1540   67.667600  0.5011  0.0163  0.0035   3.2608  0.018100  0.012300   
+1541   23.597900  0.5021  0.0103  0.0030   2.0418  0.026600  0.006300   
+1542  121.942600  0.4992  0.0136  0.0037   2.7204  0.021600  0.026300   
+1543   50.882700  0.4975  0.0109  0.0038   2.1905  0.027300  0.013900   
+1544   72.967600  0.4986  0.0192  0.0046   3.8442  0.017200  0.012600   
+1545  402.687400  0.4951  0.0165  0.0051   3.3383  0.006300  0.025200   
+1546  105.714200  0.5022  0.0249  0.0049   4.9623  0.013400  0.014200   
+1547   36.297500  0.5012  0.0160  0.0044   3.2008  0.022200  0.008000   
+1548   88.581200  0.4944  0.0171  0.0040   3.4656  0.025300  0.022400   
+1549   97.934373  0.5037  0.0117  0.0030   2.3203  0.025300  0.022400   
+1550   27.551400  0.5034  0.0178  0.0043   3.5459  0.023600  0.006500   
+1551   30.757400  0.4972  0.0157  0.0040   3.1578  0.040000  0.012300   
+1552  247.628500  0.5031  0.0111  0.0028   2.2144  0.008500  0.021200   
+1553  134.398300  0.4985  0.0126  0.0036   2.5295  0.017400  0.023400   
+1554  117.094500  0.5025  0.0138  0.0039   2.7512  0.023500  0.027500   
+1555  184.870300  0.5002  0.0130  0.0035   2.5982  0.008600  0.016000   
+1556   46.107600  0.5019  0.0158  0.0043   3.1428  0.012000  0.005500   
+1557   26.733000  0.5010  0.0132  0.0035   2.6249  0.027700  0.007400   
+1558  176.678300  0.4993  0.0130  0.0037   2.5976  0.009700  0.017200   
+1559  117.456400  0.4960  0.0157  0.0036   3.1743  0.015000  0.017600   
+1560  127.315400  0.5009  0.0155  0.0036   3.0997  0.010500  0.013300   
+1561   46.457300  0.4965  0.0118  0.0032   2.3817  0.032000  0.014800   
+1562  203.172000  0.4988  0.0143  0.0039   2.8669  0.006800  0.013800   
+1563   97.934373  0.4975  0.0131  0.0036   2.6238  0.006800  0.013800   
+1564   43.523100  0.4987  0.0153  0.0041   3.0590  0.019700  0.008600   
+1565   93.494100  0.5004  0.0178  0.0038   3.5662  0.026200  0.024500   
+1566  137.784400  0.4987  0.0181  0.0040   3.6275  0.011700  0.016200   
+
+           588         589  
+0     0.005283   99.670066  
+1     0.006000  208.204500  
+2     0.014800   82.860200  
+3     0.004400   73.843200  
+4     0.004400   73.843200  
+5     0.005200   44.007700  
+6     0.005200   44.007700  
+7     0.006300   95.031000  
+8     0.004500  111.652500  
+9     0.007300   90.229400  
+10    0.007100   57.812200  
+11    0.008100   75.507700  
+12    0.003400   52.203900  
+13    0.003400   52.203900  
+14    0.008400  142.908000  
+15    0.004500  100.274500  
+16    0.004200   82.098900  
+17    0.004200   82.098900  
+18    0.004200   82.098900  
+19    0.003200   47.158600  
+20    0.003200   47.158600  
+21    0.002300   34.415300  
+22    0.007500  114.597900  
+23    0.007700  216.886900  
+24    0.010100  125.060000  
+25    0.010100  125.060000  
+26    0.010100  125.060000  
+27    0.011600  216.955200  
+28    0.005300  127.506700  
+29    0.006200  146.871500  
+{\ldots}        {\ldots}         {\ldots}  
+1537  0.003700   48.704500  
+1538  0.003800   47.337600  
+1539  0.003800   47.337600  
+1540  0.004600   67.667600  
+1541  0.001900   23.597900  
+1542  0.008700  121.942600  
+1543  0.005500   50.882700  
+1544  0.003900   72.967600  
+1545  0.007000  402.687400  
+1546  0.004700  105.714200  
+1547  0.002200   36.297500  
+1548  0.007100   88.581200  
+1549  0.007100   88.581200  
+1550  0.002200   27.551400  
+1551  0.004400   30.757400  
+1552  0.007400  247.628500  
+1553  0.007700  134.398300  
+1554  0.009800  117.094500  
+1555  0.005100  184.870300  
+1556  0.001600   46.107600  
+1557  0.002300   26.733000  
+1558  0.005400  176.678300  
+1559  0.005700  117.456400  
+1560  0.004200  127.315400  
+1561  0.005100   46.457300  
+1562  0.004700  203.172000  
+1563  0.004700  203.172000  
+1564  0.002500   43.523100  
+1565  0.007500   93.494100  
+1566  0.004500  137.784400  
+
+[1567 rows x 590 columns]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 0
+\end{Verbatim}
+            
+    \begin{quote}
+Convert dataframe to numpy array
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{values}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[3.03093000e+03 2.56400000e+03 2.18773330e+03 {\ldots} 1.64749042e-02
+  5.28333333e-03 9.96700663e+01]
+ [3.09578000e+03 2.46514000e+03 2.23042220e+03 {\ldots} 2.01000000e-02
+  6.00000000e-03 2.08204500e+02]
+ [2.93261000e+03 2.55994000e+03 2.18641110e+03 {\ldots} 4.84000000e-02
+  1.48000000e-02 8.28602000e+01]
+ {\ldots}
+ [2.97881000e+03 2.37978000e+03 2.20630000e+03 {\ldots} 8.60000000e-03
+  2.50000000e-03 4.35231000e+01]
+ [2.89492000e+03 2.53201000e+03 2.17703330e+03 {\ldots} 2.45000000e-02
+  7.50000000e-03 9.34941000e+01]
+ [2.94492000e+03 2.45076000e+03 2.19544440e+03 {\ldots} 1.62000000e-02
+  4.50000000e-03 1.37784400e+02]]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Mean for each column
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{mean\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{mean\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 3.01445290e+03  2.49585023e+03  2.20054732e+03  1.39637663e+03
+  4.19701314e+00  1.00000000e+02  1.01112908e+02  1.21821502e-01
+  1.46286166e+00 -8.41022364e-04  1.45750799e-04  9.64352780e-01
+  1.99956809e+02  0.00000000e+00  9.00537052e+00  4.13086035e+02
+  9.90760281e+00  9.71443926e-01  1.90047354e+02  1.24810340e+01
+  1.40505424e+00 -5.61839361e+03  2.69937843e+03 -3.80629973e+03
+ -2.98598136e+02  1.20384473e+00  1.93847681e+00  6.63862799e+00
+  6.94995323e+01  2.36619744e+00  1.84158914e-01  3.67318939e+00
+  8.53374687e+01  8.96027854e+00  5.05826386e+01  6.45557870e+01
+  4.94173705e+01  6.62212736e+01  8.68365766e+01  1.18679554e+02
+  6.79049093e+01  3.35306617e+00  7.00000000e+01  3.55538904e+02
+  1.00311650e+01  1.36743060e+02  7.33672811e+02  1.17795811e+00
+  1.39972231e+02  1.00000000e+00  6.32254197e+02  1.57420991e+02
+  0.00000000e+00  4.59297121e+00  4.83852271e+00  2.85617210e+03
+  9.28849328e-01  9.49215035e-01  4.59331177e+00  2.96024147e+00
+  3.55159094e+02  1.04231429e+01  1.16502329e+02  1.39899270e+01
+  2.05421090e+01  2.71318156e+01  7.06668523e+02  1.67154436e+01
+  1.47437578e+02  1.00000000e+00  6.19101687e+02  1.04329033e+02
+  1.50361552e+02  4.68020404e+02  2.68770019e-03 -6.90304601e-03
+ -2.93904731e-02 -7.04141283e-03 -1.36425794e-02  3.45832793e-03
+ -1.85307842e-02 -2.11533377e-02  6.05489307e-03  7.45206660e+00
+  1.33107910e-01  1.12783186e-01  2.40187154e+00  9.82420294e-01
+  1.80781502e+03  1.88703232e-01  8.82753687e+03  2.43984625e-03
+  5.06900958e-04 -5.40511182e-04 -2.91479821e-05  6.00256246e-05
+  1.71266496e-02  0.00000000e+00 -1.81426650e-02  1.54010250e-03
+ -2.12684177e-05 -7.23894939e-06  1.11460602e-03 -9.78907348e-03
+ -1.46325879e-05 -4.97885971e-04  5.39525945e-04 -1.76591928e-03
+ -1.07885971e-02  9.79992532e-01  1.01318253e+02  2.31818898e+02
+  4.57537676e-01  9.45424186e-01  1.22527122e-04  7.47383792e+02
+  9.87129930e-01  5.86259079e+01  5.98411666e-01  9.70777090e-01
+  6.31086305e+00  1.57964249e+01  3.89838960e+00  1.58296598e+01
+  1.57947047e+01  1.18495571e+00  2.75072850e+00  6.48477599e-01
+  3.19218228e+00 -5.54228306e-01  7.44976444e-01  9.97808344e-01
+  2.31854464e+00  1.00404309e+03  3.93919785e+01  1.17960948e+02
+  1.38194747e+02  1.22692949e+02  5.76030246e+01  4.16766964e+02
+  2.60779039e+01  0.00000000e+00  6.64156471e+00  4.16944801e-03
+  1.20008115e-01  6.36214058e-02  5.50100319e-02  1.74109904e-02
+  8.47130792e+00  0.00000000e+00  6.81426790e+00  1.40474028e+01
+  1.19673318e+00  1.19264706e-02  7.69797091e+00  5.07171484e-01
+  5.80885769e-02  4.71043478e-02  1.03965074e+03  8.82680511e+02
+  5.55346326e+02  4.06685048e+03  4.79715463e+03  1.40204473e-01
+  1.27942492e-01  2.52025559e-01  2.78888179e+00  1.23578275e+00
+  1.24396805e-01  4.00453674e-01  6.84330332e-01  1.20064112e-01
+  3.20112516e-01  5.76191954e-01  3.20112771e-01  7.78043614e-01
+  2.44717752e-01  3.94759898e-01  0.00000000e+00  0.00000000e+00
+  1.90132567e+01  5.46770115e-01  1.07805428e+01  2.66611704e+01
+  1.44815453e-01  7.36574074e+00  0.00000000e+00  1.79362898e+01
+  4.32114183e+01  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  2.87084453e-01
+  8.68848718e+00  2.00927098e+01  5.57358744e-01  1.15320564e+01
+  1.76001923e+01  7.83935897e+00  1.01704633e+01  3.00731427e+01
+  3.22181689e+01  9.05012172e+00  1.28122998e-03  2.03761755e+01
+  7.32643165e+01  2.95643818e-02  8.88657809e-02  5.67549579e-02
+  5.14320804e-02  6.03461439e-02  8.32684381e-02  8.10755671e-02
+  8.34835386e-02  7.16353856e-02  3.77146539e+00  3.25401929e-03
+  9.21283186e-03  6.07175495e-02  8.82118698e-03  1.22846571e+02
+  5.93704485e-02  1.04105659e+03  0.00000000e+00  1.91250479e-02
+  1.78444089e-02  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  4.79137380e-03  4.57488818e-03
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  5.75500911e-03  1.72972332e+00  4.14874189e+00  5.33735915e-02
+  2.51712189e-02  1.06522017e-03  1.09650967e+02  4.28481174e-03
+  4.64511487e+00  3.32162022e-02  1.39432036e-02  4.03848117e-01
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  7.05869147e-02
+  1.95046767e+01  3.77786568e+00  2.92602905e+01  4.60565981e+01
+  4.12981474e+01  2.01812462e+01  1.36292426e+02  8.69321275e+00
+  0.00000000e+00  2.21074449e+00  1.11745828e-03  4.10568690e-02
+  1.80335463e-02  1.50940575e-02  5.76984026e-03  2.80398428e+00
+  0.00000000e+00  2.11979533e+00  4.26001784e+00  3.67529284e-01
+  3.92365729e-03  2.57859597e+00  1.23426975e-01  1.99262285e-02
+  1.44869565e-02  3.35551157e+02  4.01814750e+02  2.52999118e+02
+  1.87922837e+03  2.34282698e+03  6.38044728e-02  6.02668371e-02
+  1.18386198e-01  9.10145942e-01  4.03342300e-01  4.03438339e-02
+  1.32076486e-01  2.64916794e-01  4.86231162e-02  1.28920945e-01
+  2.18414240e-01  1.28921264e-01  3.04751788e-01  9.73443167e-02
+  1.60050830e-01  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  5.97697701e+00  1.72629119e-01  3.18877050e+00  7.91603608e+00
+  4.31049170e-02  2.26372739e+00  0.00000000e+00  5.39341980e+00
+  1.33321717e+01  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  8.32318618e-02
+  2.59348455e+00  6.21586579e+00  1.68363869e-01  3.42692511e+00
+  9.73638641e+00  2.32748160e+00  3.03757994e+00  9.32895772e+00
+  1.46735066e+01  2.73209366e+00  2.86483024e-04  6.19850826e+00
+  2.32171463e+01  7.95837581e+00  5.77021164e+00  8.91396541e-03
+  2.47057032e-02  2.52522359e-02  2.32020739e-02  2.75842515e-02
+  2.33557356e-02  4.03305250e-02  4.19209981e-02  3.45430979e-02
+  1.29862861e+00  9.98842444e-04  2.44292035e-03  1.98399489e-02
+  2.94486280e-03  3.99364063e+01  1.83829156e-02  3.33319601e+02
+  0.00000000e+00  5.19853035e-03  4.81399361e-03  3.77328635e-03
+  3.17162076e-03  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  1.60083067e-03  1.57073482e-03  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  1.82568306e-03  5.41039891e-01
+  1.28544827e+00  1.14269953e-02  8.28079132e-03  3.39246969e-04
+  3.51550911e+01  1.33835354e-03  1.43186752e+00  1.09559948e-02
+  4.53280153e-03  1.33989534e-01  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  2.42075048e-02  6.73061495e+00  1.23199731e+00
+  5.34093188e+00  4.58043030e+00  4.92934410e+00  2.61608635e+00
+  3.09113164e+01  2.56126897e+01  0.00000000e+00  6.63061590e+00
+  3.40434852e+00  8.19090550e+00  3.20259235e+02  3.09061299e+02
+  1.82126134e+00  4.17452351e+00  0.00000000e+00  7.76604459e+01
+  3.31546854e+00  6.79631247e+00  1.23385761e+00  4.05850083e+00
+  4.22074746e+00  4.17184365e+00  1.84216001e+01  2.23583049e+01
+  9.93676327e+01  2.05519304e+02  1.47339455e+01  9.37066556e+00
+  7.51326633e+00  4.01678550e+00  5.47010519e+01  7.06439420e+01
+  1.15266165e+01  8.02080971e-01  1.34525868e+00  6.33941060e-01
+  8.95042784e-01  6.47089911e-01  1.17500319e+00  2.81895338e-01
+  3.32270115e-01  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  5.34681558e+00  5.46097126e+00  7.88374157e+00  3.63663346e+00
+  1.23256854e+01  5.26366571e+00  0.00000000e+00  2.83838014e+00
+  2.91974136e+01  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  6.25209066e+00
+  2.24173047e+02  5.66229270e+00  5.36775176e+00  9.63879680e+00
+  1.37888406e+02  3.94268471e+01  3.76370497e+01  4.26257335e+00
+  2.01321546e+01  6.25792146e+00  1.28122998e-01  3.28339423e+00
+  7.55381309e+01  0.00000000e+00  3.18418448e+02  2.06564196e+02
+  2.15288948e+02  2.01111728e+02  3.02506186e+02  2.39455326e+02
+  3.52616477e+02  2.72169707e+02  5.13540452e+01  2.44267312e+00
+  8.17094292e+00  2.53004639e+00  9.56441991e-01  6.80782572e+00
+  2.98658964e+01  1.18210299e+01  0.00000000e+00  2.63195864e+02
+  2.40981377e+02  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  5.57635084e+01  2.75979457e+02
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  6.78897814e-01  1.73890219e+00  1.80627286e+00  1.17284399e+01
+  2.69599930e+00  1.16100797e+01  1.47288659e+01  4.53896426e-01
+  5.68778162e+00  5.56039734e+00  1.44345750e+00  6.39571704e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  3.03423489e+00
+  1.94282809e+00  9.61162809e+00  1.11208435e-01  8.47086262e-03
+  2.50920128e-03  7.61140313e+00  1.03963030e+00  4.03546477e+02
+  7.56798715e+01  6.63256465e-01  1.70133129e+01  1.23071155e+00
+  2.76687988e-01  7.70387353e+00  5.03657460e-01  5.77465372e+01
+  4.21690451e+00  1.62307001e+00  9.95008940e-01  3.25708174e-01
+  7.24434227e-02  3.22849559e+01  2.62729683e+02  6.79640726e-01
+  6.44498454e+00  1.45609505e-01  2.61086963e+00  6.00863988e-02
+  2.45241692e+00  2.11176740e+01  5.30523623e+02  2.10183631e+00
+  2.84501650e+01  3.45636439e-01  9.16231500e+00  1.04729164e-01
+  5.56374652e+00  1.66423629e+01  2.16145631e-02  1.68294498e-02
+  5.39595469e-03  9.79343730e+01  5.00096169e-01  1.53177522e-02
+  3.84655172e-03  3.06782637e+00  2.14584291e-02  1.64749042e-02
+  5.28333333e-03  9.96700663e+01]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Subtract means from each column
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{diff\PYZus{}data} \PY{o}{=} \PY{n}{data} \PY{o}{\PYZhy{}} \PY{n}{mean\PYZus{}data}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{diff\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1.64771044e+01  6.81497692e+01 -1.28140177e+01 {\ldots} -2.42861287e-17
+  -1.73472348e-17 -1.56319402e-13]
+ [ 8.13271044e+01 -3.07102308e+01  2.98748823e+01 {\ldots}  3.62509579e-03
+   7.16666667e-04  1.08534434e+02]
+ [-8.18428956e+01  6.40897692e+01 -1.41362177e+01 {\ldots}  3.19250958e-02
+   9.51666667e-03 -1.68098663e+01]
+ {\ldots}
+ [-3.56428956e+01 -1.16070231e+02  5.75268229e+00 {\ldots} -7.87490421e-03
+  -2.78333333e-03 -5.61469663e+01]
+ [-1.19532896e+02  3.61597692e+01 -2.35140177e+01 {\ldots}  8.02509579e-03
+   2.21666667e-03 -6.17596635e+00]
+ [-6.95328956e+01 -4.50902308e+01 -5.10291771e+00 {\ldots} -2.74904215e-04
+  -7.83333333e-04  3.81143337e+01]]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Calculate covariance matrix
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{cov\PYZus{}mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{diff\PYZus{}data}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{cov\PYZus{}mat}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 5.39940056e+03 -8.47962623e+02  1.02671010e+01 {\ldots} -1.67440688e-02
+  -5.93197815e-03  2.87879850e+01]
+ [-8.47962623e+02  6.43649877e+03  1.35942679e+01 {\ldots}  1.21967287e-02
+   2.32652705e-03  3.37335304e+02]
+ [ 1.02671010e+01  1.35942679e+01  8.63239193e+02 {\ldots} -7.59126039e-03
+  -2.59521865e-03 -9.07023669e+01]
+ {\ldots}
+ [-1.67440688e-02  1.21967287e-02 -7.59126039e-03 {\ldots}  7.75231441e-05
+   2.45865358e-05  3.22979001e-01]
+ [-5.93197815e-03  2.32652705e-03 -2.59521865e-03 {\ldots}  2.45865358e-05
+   8.21484994e-06  1.04706789e-01]
+ [ 2.87879850e+01  3.37335304e+02 -9.07023669e+01 {\ldots}  3.22979001e-01
+   1.04706789e-01  8.81006310e+03]]
+
+    \end{Verbatim}
+
+    \begin{quote}
+Comput Eigen values and Eigen vectors
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{eig\PYZus{}val\PYZus{}cov}\PY{p}{,} \PY{n}{eig\PYZus{}vec\PYZus{}cov} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{cov\PYZus{}mat}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{eig\PYZus{}val\PYZus{}cov}\PY{p}{,} \PY{n}{eig\PYZus{}vec\PYZus{}cov}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 5.34151979e+07+0.00000000e+00j  2.17466719e+07+0.00000000e+00j
+  8.24837662e+06+0.00000000e+00j  2.07388086e+06+0.00000000e+00j
+  1.31540439e+06+0.00000000e+00j  4.67693557e+05+0.00000000e+00j
+  2.90863555e+05+0.00000000e+00j  2.83668601e+05+0.00000000e+00j
+  2.37155830e+05+0.00000000e+00j  2.08513836e+05+0.00000000e+00j
+  1.96098849e+05+0.00000000e+00j  1.86856549e+05+0.00000000e+00j
+  1.52422354e+05+0.00000000e+00j  1.13215032e+05+0.00000000e+00j
+  1.08493848e+05+0.00000000e+00j  1.02849533e+05+0.00000000e+00j
+  1.00166164e+05+0.00000000e+00j  8.33473762e+04+0.00000000e+00j
+  8.15850591e+04+0.00000000e+00j  7.76560524e+04+0.00000000e+00j
+  6.66060410e+04+0.00000000e+00j  6.52620058e+04+0.00000000e+00j
+  5.96776503e+04+0.00000000e+00j  5.16269933e+04+0.00000000e+00j
+  5.03324580e+04+0.00000000e+00j  4.54661746e+04+0.00000000e+00j
+  4.41914029e+04+0.00000000e+00j  4.15532551e+04+0.00000000e+00j
+  3.55294040e+04+0.00000000e+00j  3.31436743e+04+0.00000000e+00j
+  2.67385181e+04+0.00000000e+00j  1.47123429e+04+0.00000000e+00j
+  1.44089194e+04+0.00000000e+00j  1.09321187e+04+0.00000000e+00j
+  1.04841308e+04+0.00000000e+00j  9.48876548e+03+0.00000000e+00j
+  8.34665462e+03+0.00000000e+00j  7.22765535e+03+0.00000000e+00j
+  5.34196392e+03+0.00000000e+00j  4.95614671e+03+0.00000000e+00j
+  4.23060022e+03+0.00000000e+00j  4.10673182e+03+0.00000000e+00j
+  3.41199406e+03+0.00000000e+00j  3.24193522e+03+0.00000000e+00j
+  2.74523635e+03+0.00000000e+00j  2.35027999e+03+0.00000000e+00j
+  2.16835314e+03+0.00000000e+00j  1.86414157e+03+0.00000000e+00j
+  1.76741826e+03+0.00000000e+00j  1.70492093e+03+0.00000000e+00j
+  1.66199683e+03+0.00000000e+00j  1.53948465e+03+0.00000000e+00j
+  1.33096008e+03+0.00000000e+00j  1.25591691e+03+0.00000000e+00j
+  1.15509389e+03+0.00000000e+00j  1.12410108e+03+0.00000000e+00j
+  1.03213798e+03+0.00000000e+00j  1.00972093e+03+0.00000000e+00j
+  9.50542179e+02+0.00000000e+00j  9.09791361e+02+0.00000000e+00j
+  8.32001551e+02+0.00000000e+00j  8.08898242e+02+0.00000000e+00j
+  7.37343627e+02+0.00000000e+00j  6.87596830e+02+0.00000000e+00j
+  5.64452104e+02+0.00000000e+00j  5.51812250e+02+0.00000000e+00j
+  5.37209115e+02+0.00000000e+00j  4.93029995e+02+0.00000000e+00j
+  4.13720573e+02+0.00000000e+00j  3.90222119e+02+0.00000000e+00j
+  3.37288784e+02+0.00000000e+00j  3.27558605e+02+0.00000000e+00j
+  3.08869553e+02+0.00000000e+00j  2.46285839e+02+0.00000000e+00j
+  2.28893093e+02+0.00000000e+00j  1.96447852e+02+0.00000000e+00j
+  1.75559820e+02+0.00000000e+00j  1.65795169e+02+0.00000000e+00j
+  1.56428052e+02+0.00000000e+00j  1.39671194e+02+0.00000000e+00j
+  1.28662864e+02+0.00000000e+00j  1.15624070e+02+0.00000000e+00j
+  1.10318239e+02+0.00000000e+00j  1.08663541e+02+0.00000000e+00j
+  1.00695416e+02+0.00000000e+00j  9.80687852e+01+0.00000000e+00j
+  8.34968275e+01+0.00000000e+00j  7.53025397e+01+0.00000000e+00j
+  6.89260158e+01+0.00000000e+00j  6.67786503e+01+0.00000000e+00j
+  6.09412873e+01+0.00000000e+00j  5.30974002e+01+0.00000000e+00j
+  4.71797825e+01+0.00000000e+00j  4.50701108e+01+0.00000000e+00j
+  4.41349593e+01+0.00000000e+00j  4.03313416e+01+0.00000000e+00j
+  3.95741636e+01+0.00000000e+00j  3.74000035e+01+0.00000000e+00j
+  3.44211326e+01+0.00000000e+00j  3.30031584e+01+0.00000000e+00j
+  3.03317756e+01+0.00000000e+00j  2.88994580e+01+0.00000000e+00j
+  2.76478754e+01+0.00000000e+00j  2.57708695e+01+0.00000000e+00j
+  2.44506430e+01+0.00000000e+00j  2.31640106e+01+0.00000000e+00j
+  2.26956957e+01+0.00000000e+00j  2.16925102e+01+0.00000000e+00j
+  2.10114869e+01+0.00000000e+00j  2.00984697e+01+0.00000000e+00j
+  1.86489543e+01+0.00000000e+00j  1.83733216e+01+0.00000000e+00j
+  1.72517802e+01+0.00000000e+00j  1.60481189e+01+0.00000000e+00j
+  1.54406997e+01+0.00000000e+00j  1.48356499e+01+0.00000000e+00j
+  1.44273357e+01+0.00000000e+00j  1.42318192e+01+0.00000000e+00j
+  1.35592064e+01+0.00000000e+00j  1.30696836e+01+0.00000000e+00j
+  1.28193512e+01+0.00000000e+00j  1.22093626e+01+0.00000000e+00j
+  1.15228376e+01+0.00000000e+00j  1.12141738e+01+0.00000000e+00j
+  1.02585936e+01+0.00000000e+00j  9.86906139e+00+0.00000000e+00j
+  9.58794460e+00+0.00000000e+00j  9.41686288e+00+0.00000000e+00j
+  9.20276340e+00+0.00000000e+00j  8.63791398e+00+0.00000000e+00j
+  8.20622561e+00+0.00000000e+00j  8.01020114e+00+0.00000000e+00j
+  7.53391290e+00+0.00000000e+00j  7.33168361e+00+0.00000000e+00j
+  7.09960245e+00+0.00000000e+00j  7.02149364e+00+0.00000000e+00j
+  6.76557324e+00+0.00000000e+00j  6.34504733e+00+0.00000000e+00j
+  6.01919292e+00+0.00000000e+00j  5.81680918e+00+0.00000000e+00j
+  5.44653788e+00+0.00000000e+00j  5.12338463e+00+0.00000000e+00j
+  4.79593185e+00+0.00000000e+00j  4.47851795e+00+0.00000000e+00j
+  4.50369987e+00+0.00000000e+00j  4.27479386e+00+0.00000000e+00j
+  3.89124198e+00+0.00000000e+00j  3.56466892e+00+0.00000000e+00j
+  3.32248982e+00+0.00000000e+00j  2.97665360e+00+0.00000000e+00j
+  2.61425544e+00+0.00000000e+00j  2.31802829e+00+0.00000000e+00j
+  2.17171124e+00+0.00000000e+00j  1.99239284e+00+0.00000000e+00j
+  1.96616566e+00+0.00000000e+00j  1.88149281e+00+0.00000000e+00j
+  1.79228288e+00+0.00000000e+00j  1.71378363e+00+0.00000000e+00j
+  1.68028783e+00+0.00000000e+00j  1.60686268e+00+0.00000000e+00j
+  1.47158244e+00+0.00000000e+00j  1.40656712e+00+0.00000000e+00j
+  1.37808906e+00+0.00000000e+00j  1.27967672e+00+0.00000000e+00j
+  1.22803716e+00+0.00000000e+00j  1.18531109e+00+0.00000000e+00j
+  9.38857180e-01+0.00000000e+00j  9.18222054e-01+0.00000000e+00j
+  8.26265393e-01+0.00000000e+00j  7.96585842e-01+0.00000000e+00j
+  7.74597255e-01+0.00000000e+00j  7.14002770e-01+0.00000000e+00j
+  6.79457797e-01+0.00000000e+00j  6.37928310e-01+0.00000000e+00j
+  6.24646758e-01+0.00000000e+00j  5.34605353e-01+0.00000000e+00j
+  4.60658687e-01+0.00000000e+00j  4.24265893e-01+0.00000000e+00j
+  4.08634622e-01+0.00000000e+00j  3.70321764e-01+0.00000000e+00j
+  3.67016386e-01+0.00000000e+00j  3.35858033e-01+0.00000000e+00j
+  3.29780397e-01+0.00000000e+00j  2.94348753e-01+0.00000000e+00j
+  2.84154176e-01+0.00000000e+00j  2.72703994e-01+0.00000000e+00j
+  2.63265991e-01+0.00000000e+00j  2.45227786e-01+0.00000000e+00j
+  2.25805135e-01+0.00000000e+00j  2.22331919e-01+0.00000000e+00j
+  2.13514673e-01+0.00000000e+00j  1.93961935e-01+0.00000000e+00j
+  1.91647269e-01+0.00000000e+00j  1.83668491e-01+0.00000000e+00j
+  1.82518017e-01+0.00000000e+00j  1.65310922e-01+0.00000000e+00j
+  1.57447909e-01+0.00000000e+00j  1.51263974e-01+0.00000000e+00j
+  1.39427297e-01+0.00000000e+00j  1.32638882e-01+0.00000000e+00j
+  1.28000027e-01+0.00000000e+00j  1.13559952e-01+0.00000000e+00j
+  1.12576237e-01+0.00000000e+00j  1.08809771e-01+0.00000000e+00j
+  1.07136355e-01+0.00000000e+00j  8.60839655e-02+0.00000000e+00j
+  8.50467792e-02+0.00000000e+00j  8.29254355e-02+0.00000000e+00j
+  7.03701660e-02+0.00000000e+00j  6.44475619e-02+0.00000000e+00j
+  6.09866327e-02+0.00000000e+00j  6.05709478e-02+0.00000000e+00j
+  5.93963958e-02+0.00000000e+00j  5.22163549e-02+0.00000000e+00j
+  4.92729703e-02+0.00000000e+00j  4.80022983e-02+0.00000000e+00j
+  4.51487439e-02+0.00000000e+00j  4.30180504e-02+0.00000000e+00j
+  4.13368324e-02+0.00000000e+00j  4.03281604e-02+0.00000000e+00j
+  3.91576587e-02+0.00000000e+00j  3.54198873e-02+0.00000000e+00j
+  3.31199510e-02+0.00000000e+00j  3.13547234e-02+0.00000000e+00j
+  3.07226509e-02+0.00000000e+00j  2.98354196e-02+0.00000000e+00j
+  2.81949091e-02+0.00000000e+00j  2.49158051e-02+0.00000000e+00j
+  2.36374781e-02+0.00000000e+00j  2.28360210e-02+0.00000000e+00j
+  2.19602047e-02+0.00000000e+00j  2.00166957e-02+0.00000000e+00j
+  1.86597535e-02+0.00000000e+00j  1.80415918e-02+0.00000000e+00j
+  1.72261012e-02+0.00000000e+00j  1.60703860e-02+0.00000000e+00j
+  1.49566735e-02+0.00000000e+00j  1.40165444e-02+0.00000000e+00j
+  1.31296856e-02+0.00000000e+00j  1.21358005e-02+0.00000000e+00j
+  1.07166503e-02+0.00000000e+00j  1.01045695e-02+0.00000000e+00j
+  9.76055340e-03+0.00000000e+00j  9.16740926e-03+0.00000000e+00j
+  8.78108857e-03+0.00000000e+00j  8.67465278e-03+0.00000000e+00j
+  8.30918514e-03+0.00000000e+00j  8.05104488e-03+0.00000000e+00j
+  7.56152126e-03+0.00000000e+00j  7.31508852e-03+0.00000000e+00j
+  7.26347037e-03+0.00000000e+00j  6.65728354e-03+0.00000000e+00j
+  6.50769617e-03+0.00000000e+00j  6.28009879e-03+0.00000000e+00j
+  6.19160730e-03+0.00000000e+00j  5.64130272e-03+0.00000000e+00j
+  5.30195373e-03+0.00000000e+00j  5.07453702e-03+0.00000000e+00j
+  4.47372286e-03+0.00000000e+00j  4.32543895e-03+0.00000000e+00j
+  4.22006582e-03+0.00000000e+00j  3.97065729e-03+0.00000000e+00j
+  3.75292740e-03+0.00000000e+00j  3.64861290e-03+0.00000000e+00j
+  3.38915810e-03+0.00000000e+00j  3.27965962e-03+0.00000000e+00j
+  3.06633825e-03+0.00000000e+00j  2.99206786e-03+0.00000000e+00j
+  2.83586784e-03+0.00000000e+00j  2.74987243e-03+0.00000000e+00j
+  2.31066313e-03+0.00000000e+00j  2.26782346e-03+0.00000000e+00j
+  1.82206662e-03+0.00000000e+00j  1.74955624e-03+0.00000000e+00j
+  1.69305161e-03+0.00000000e+00j  1.66624597e-03+0.00000000e+00j
+  1.55346749e-03+0.00000000e+00j  1.51278404e-03+0.00000000e+00j
+  1.47296800e-03+0.00000000e+00j  1.33617458e-03+0.00000000e+00j
+  1.30517592e-03+0.00000000e+00j  1.24056353e-03+0.00000000e+00j
+  1.19823961e-03+0.00000000e+00j  1.14381059e-03+0.00000000e+00j
+  1.13027458e-03+0.00000000e+00j  1.11081803e-03+0.00000000e+00j
+  1.08359152e-03+0.00000000e+00j  1.03517496e-03+0.00000000e+00j
+  1.00164593e-03+0.00000000e+00j  9.50024604e-04+0.00000000e+00j
+  8.94981182e-04+0.00000000e+00j  8.74363843e-04+0.00000000e+00j
+  7.98497544e-04+0.00000000e+00j  7.51612219e-04+0.00000000e+00j
+  6.63964301e-04+0.00000000e+00j  6.21097642e-04+0.00000000e+00j
+  6.18098603e-04+0.00000000e+00j  5.72611402e-04+0.00000000e+00j
+  5.57509230e-04+0.00000000e+00j  5.47002381e-04+0.00000000e+00j
+  5.27195076e-04+0.00000000e+00j  5.11487997e-04+0.00000000e+00j
+  4.87787872e-04+0.00000000e+00j  4.74249071e-04+0.00000000e+00j
+  4.52367688e-04+0.00000000e+00j  4.24431100e-04+0.00000000e+00j
+  4.19119024e-04+0.00000000e+00j  3.72489906e-04+0.00000000e+00j
+  3.38125455e-04+0.00000000e+00j  3.34002143e-04+0.00000000e+00j
+  2.97951371e-04+0.00000000e+00j  2.84845900e-04+0.00000000e+00j
+  2.79038287e-04+0.00000000e+00j  2.77054476e-04+0.00000000e+00j
+  2.67962796e-04+0.00000000e+00j  2.54815125e-04+0.00000000e+00j
+  2.29230595e-04+0.00000000e+00j  1.99245436e-04+0.00000000e+00j
+  1.90381389e-04+0.00000000e+00j  1.84497913e-04+0.00000000e+00j
+  1.77415682e-04+0.00000000e+00j  1.68160613e-04+0.00000000e+00j
+  1.63992030e-04+0.00000000e+00j  1.58025552e-04+0.00000000e+00j
+  1.54226003e-04+0.00000000e+00j  1.46890640e-04+0.00000000e+00j
+  1.46097434e-04+0.00000000e+00j  1.40079892e-04+0.00000000e+00j
+  1.35736724e-04+0.00000000e+00j  1.22704035e-04+0.00000000e+00j
+  1.16752515e-04+0.00000000e+00j  1.14080847e-04+0.00000000e+00j
+  1.04252869e-04+0.00000000e+00j  9.90265102e-05+0.00000000e+00j
+  9.66039063e-05+0.00000000e+00j  9.60766568e-05+0.00000000e+00j
+  9.16166314e-05+0.00000000e+00j  9.07003472e-05+0.00000000e+00j
+  8.60212632e-05+0.00000000e+00j  8.32654022e-05+0.00000000e+00j
+  7.70526075e-05+0.00000000e+00j  7.36470021e-05+0.00000000e+00j
+  7.24998303e-05+0.00000000e+00j  6.80209909e-05+0.00000000e+00j
+  6.68682701e-05+0.00000000e+00j  6.14500427e-05+0.00000000e+00j
+  5.99843178e-05+0.00000000e+00j  5.49918003e-05+0.00000000e+00j
+  5.24646953e-05+0.00000000e+00j  5.13403845e-05+0.00000000e+00j
+  5.02336257e-05+0.00000000e+00j  4.89288503e-05+0.00000000e+00j
+  4.51104474e-05+0.00000000e+00j  4.29823763e-05+0.00000000e+00j
+  4.18869714e-05+0.00000000e+00j  4.14341562e-05+0.00000000e+00j
+  3.94822843e-05+0.00000000e+00j  3.80307292e-05+0.00000000e+00j
+  3.57776535e-05+0.00000000e+00j  3.43901591e-05+0.00000000e+00j
+  2.98089202e-05+0.00000000e+00j  2.72388358e-05+0.00000000e+00j
+  2.42608885e-05+0.00000000e+00j  1.66549051e-05+0.00000000e+00j
+  2.30962279e-05+0.00000000e+00j  2.27807558e-05+0.00000000e+00j
+  2.14440814e-05+0.00000000e+00j  1.96208174e-05+0.00000000e+00j
+  1.88276186e-05+0.00000000e+00j  1.91217363e-05+0.00000000e+00j
+  1.46846459e-05+0.00000000e+00j  1.43753346e-05+0.00000000e+00j
+  1.39779892e-05+0.00000000e+00j  1.21760519e-05+0.00000000e+00j
+  1.20295835e-05+0.00000000e+00j  8.34247981e-06+0.00000000e+00j
+  1.13426750e-05+0.00000000e+00j  1.09258905e-05+0.00000000e+00j
+  8.93991857e-06+0.00000000e+00j  9.23630205e-06+0.00000000e+00j
+  1.02782990e-05+0.00000000e+00j  1.01021808e-05+0.00000000e+00j
+  9.64538294e-06+0.00000000e+00j  9.72678794e-06+0.00000000e+00j
+  7.36188589e-06+0.00000000e+00j  7.20354827e-06+0.00000000e+00j
+  2.78847699e-06+0.00000000e+00j  6.69282813e-06+0.00000000e+00j
+  3.48065951e-06+0.00000000e+00j  3.65202836e-06+0.00000000e+00j
+  3.77558986e-06+0.00000000e+00j  4.11265577e-06+0.00000000e+00j
+  4.45482133e-06+0.00000000e+00j  4.65422046e-06+0.00000000e+00j
+  6.49477814e-06+0.00000000e+00j  5.09342483e-06+0.00000000e+00j
+  5.31392219e-06+0.00000000e+00j  5.67034892e-06+0.00000000e+00j
+  5.91044556e-06+0.00000000e+00j  6.00244889e-06+0.00000000e+00j
+  2.66299628e-06+0.00000000e+00j  2.57492503e-06+0.00000000e+00j
+  2.39210232e-06+0.00000000e+00j  2.06298821e-06+0.00000000e+00j
+  2.00824521e-06+0.00000000e+00j  1.76373602e-06+0.00000000e+00j
+  1.58273269e-06+0.00000000e+00j  1.32211395e-06+0.00000000e+00j
+  1.49813697e-06+0.00000000e+00j  1.44003524e-06+0.00000000e+00j
+  1.42489429e-06+0.00000000e+00j  1.10002716e-06+0.00000000e+00j
+  9.01008863e-07+0.00000000e+00j  8.49881106e-07+0.00000000e+00j
+  7.62521870e-07+0.00000000e+00j  6.57641103e-07+0.00000000e+00j
+  5.85636641e-07+0.00000000e+00j  5.33937361e-07+0.00000000e+00j
+  4.16077215e-07+0.00000000e+00j  3.33765858e-07+0.00000000e+00j
+  2.95575265e-07+0.00000000e+00j  2.54744632e-07+0.00000000e+00j
+  2.20144574e-07+0.00000000e+00j  1.86314527e-07+0.00000000e+00j
+  1.77370969e-07+0.00000000e+00j  1.54794344e-07+0.00000000e+00j
+  1.47331688e-07+0.00000000e+00j  1.39738552e-07+0.00000000e+00j
+  1.04110968e-07+0.00000000e+00j  1.00786519e-07+0.00000000e+00j
+  9.38635096e-08+0.00000000e+00j  9.10853311e-08+0.00000000e+00j
+  8.71546333e-08+0.00000000e+00j  7.48338889e-08+0.00000000e+00j
+  6.06817434e-08+0.00000000e+00j  5.66479200e-08+0.00000000e+00j
+  5.24576911e-08+0.00000000e+00j  4.57020627e-08+0.00000000e+00j
+  2.89942624e-08+0.00000000e+00j  2.60449422e-08+0.00000000e+00j
+  2.17618740e-08+0.00000000e+00j  2.10987990e-08+0.00000000e+00j
+  1.75542294e-08+0.00000000e+00j  1.34637029e-08+0.00000000e+00j
+  1.27167435e-08+0.00000000e+00j  1.23258199e-08+0.00000000e+00j
+  1.04987513e-08+0.00000000e+00j  8.49421241e-09+0.00000000e+00j
+  7.42188956e-09+0.00000000e+00j  6.46870561e-09+0.00000000e+00j
+  9.86367963e-09+0.00000000e+00j  9.33428079e-09+0.00000000e+00j
+  6.84633790e-09+0.00000000e+00j  5.76455782e-09+0.00000000e+00j
+  5.01138095e-09+0.00000000e+00j  3.48686474e-09+0.00000000e+00j
+  2.91267161e-09+0.00000000e+00j  2.77880623e-09+0.00000000e+00j
+  1.73093441e-09+0.00000000e+00j  1.42391207e-09+0.00000000e+00j
+  9.24976834e-10+0.00000000e+00j  1.16455315e-09+0.00000000e+00j
+  1.11816210e-09+0.00000000e+00j  6.95076156e-10+0.00000000e+00j
+  1.80003583e-10+0.00000000e+00j  1.97062511e-10+0.00000000e+00j
+  2.61924449e-10+0.00000000e+00j  6.13280115e-10+0.00000000e+00j
+  5.27594102e-10+0.00000000e+00j  2.04507295e-15+0.00000000e+00j
+ -4.15490629e-16+3.10468424e-16j -4.15490629e-16-3.10468424e-16j
+ -1.59991504e-17+0.00000000e+00j -7.12934800e-19+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j
+  0.00000000e+00+0.00000000e+00j  0.00000000e+00+0.00000000e+00j] [[-6.39070760e-04+0.j -1.20314234e-04+0.j  1.22460363e-04+0.j {\ldots}
+   0.00000000e+00+0.j  0.00000000e+00+0.j  0.00000000e+00+0.j]
+ [ 2.35722934e-05+0.j -6.60163227e-04+0.j  1.71369126e-03+0.j {\ldots}
+   0.00000000e+00+0.j  0.00000000e+00+0.j  0.00000000e+00+0.j]
+ [ 2.36801459e-04+0.j  1.58026311e-04+0.j  3.28185512e-04+0.j {\ldots}
+   0.00000000e+00+0.j  0.00000000e+00+0.j  0.00000000e+00+0.j]
+ {\ldots}
+ [ 2.61329351e-08+0.j -6.06233975e-09+0.j  1.09328336e-09+0.j {\ldots}
+   0.00000000e+00+0.j  0.00000000e+00+0.j  0.00000000e+00+0.j]
+ [ 5.62597732e-09+0.j  5.96647587e-09+0.j  8.83024927e-09+0.j {\ldots}
+   0.00000000e+00+0.j  0.00000000e+00+0.j  0.00000000e+00+0.j]
+ [ 3.89298443e-04+0.j -2.32070657e-04+0.j  7.13534990e-04+0.j {\ldots}
+   0.00000000e+00+0.j  0.00000000e+00+0.j  0.00000000e+00+0.j]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{eig\PYZus{}val\PYZus{}cov}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/numpy/core/numeric.py:492: ComplexWarning: Casting complex values to real discards the imaginary part
+  return array(a, dtype, copy=False, order=order)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} [<matplotlib.lines.Line2D at 0x109949d68>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{eig\PYZus{}vec\PYZus{}cov}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} (590, 590)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{eig\PYZus{}val\PYZus{}cov}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} (590,)
+\end{Verbatim}
+            
+    \begin{quote}
+Get indexes of the sorted eigen values
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{eig\PYZus{}val\PYZus{}cov}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{P} \PY{o}{=} \PY{n}{eig\PYZus{}vec\PYZus{}cov}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{diff\PYZus{}data}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{P}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} 590
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{P}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} 53381110.302403666
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{variances} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{P}\PY{p}{[}\PY{n}{x}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{P}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{variances}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} array([53381110.30240367, 21732794.00299704,  8243112.81400466,
+                 2072557.38714381,  1314564.94654084,   467395.09304467,
+                  290677.93732237,   283487.5741031 ,   237004.48591036,
+                  208380.77019583])
+\end{Verbatim}
+            
+    \begin{quote}
+Plot the variances
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{variances}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{variances}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    5 is the saturation point
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
